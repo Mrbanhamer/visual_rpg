@@ -1,18 +1,18 @@
 import pygame
 import time
+from settings.world_settings import WORLD_HEIGHT, WORLD_WIDTH, frame_width, frame_height, screen
 
 pygame.init()
-screen = pygame.display.set_mode((1920, 1080))
 clock = pygame.time.Clock()
 running = True
 dt = 0
 
 player_sprite = pygame.image.load(
-    'Tech Dungeon Roguelite - Asset Pack (DEMO)/Players/No Outlines/players blue x3.png'
+    'sprites/Tech Dungeon Roguelite - Asset Pack (DEMO)/Players/No Outlines/players blue x3.png'
 ).convert_alpha()
 
 background = pygame.image.load(
-    '128x128/brick/brick_20-128x128.png'
+    'sprites/128x128/brick/brick_20-128x128.png'
 ).convert()
 
 player_x = 1000
@@ -20,12 +20,6 @@ player_y = 800
 
 bg_width = background.get_width()
 bg_height = background.get_height()
-
-WORLD_WIDTH = 4000
-WORLD_HEIGHT = 3000
-
-frame_width = 68
-frame_height = 130
 
 idle_frame = player_sprite.subsurface((0, 0, frame_width, frame_height))
 running_frames = []
@@ -73,3 +67,6 @@ while running:
     dt = clock.tick(60) / 1000
 
 pygame.quit()
+
+if __name__ == '__main__':
+    pass
