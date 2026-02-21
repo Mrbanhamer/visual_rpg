@@ -1,7 +1,7 @@
 import pygame
 from settings.world_settings import WORLD_HEIGHT, WORLD_WIDTH, frame_width, frame_height, screen_size
 from settings.player_settings import player_x, player_y
-from rendering.render import player_idle, player_move, background_brick, load_player_sprites
+from rendering.render import player_idle, player_move, get_brick_sprite, get_player_sprite
 
 def start_game():
     global player_x, player_y, frame_height, frame_width
@@ -15,9 +15,9 @@ def start_game():
     screen_width = screen.get_width()
     screen_height = screen.get_height()
 
-    player_sprite = load_player_sprites()
-    background = background_brick()
-    stop = player_idle()
+    player_sprite = get_player_sprite()
+    background = get_brick_sprite()
+    stop = player_idle(get_player_sprite())
 
     bg_width = background.get_width()
     bg_height = background.get_height()
