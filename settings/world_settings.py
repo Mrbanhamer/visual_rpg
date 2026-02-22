@@ -19,5 +19,5 @@ def screen_size():
     return screen
 
 #decides the color of the world outside the background
-#def screen_fill():
-#    screen.fill("black")
+def screen_fill(screen):
+    screen.fill("black")
