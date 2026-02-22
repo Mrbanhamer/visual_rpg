@@ -1,4 +1,5 @@
 import pygame
+import asyncio
 from pathlib import Path
 from settings.world_settings import frame_height, frame_width
 
@@ -56,5 +57,7 @@ def player_move(sprite_sheet):
 def idle_animation(screen, stop):
     screen.blit(stop, (screen.get_width()//2, screen.get_height()//2))
 
-def moving_animation(screen, move):
-    screen.blit(move[1], (screen.get_width()//2, screen.get_height()//2))
+async def moving_animation(screen, move):
+    for x in range(4):
+        screen.blit(move[x], (screen.get_width()//2, screen.get_height()//2))
+        await asyncio.sleep(0,2)
