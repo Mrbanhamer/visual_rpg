@@ -52,3 +52,9 @@ def player_move(sprite_sheet):
         )
         running_frames.append(frame)
     return running_frames
+
+def idle_animation(screen, stop):
+    screen.blit(stop, (screen.get_width()//2, screen.get_height()//2))
+
+def moving_animation(screen, move):
+    screen.blit(move[1], (screen.get_width()//2, screen.get_height()//2))

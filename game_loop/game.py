@@ -2,7 +2,7 @@ import pygame
 import asyncio
 from settings.world_settings import WORLD_HEIGHT, WORLD_WIDTH, frame_width, frame_height, screen_size, screen_fill
 from settings.player_settings import player_x, player_y
-from rendering.render import player_idle, player_move, get_brick_sprite, get_player_sprite
+from rendering.render import player_idle, player_move, get_brick_sprite, get_player_sprite, idle_animation, moving_animation
 
 def start_game():
     global player_x, player_y, frame_height, frame_width
@@ -57,9 +57,9 @@ def start_game():
             moving = True
 
         if moving == True:
-            screen.blit(move[1], (screen.get_width()//2, screen.get_height()//2))
+            moving_animation(screen, move)
         else:
-            screen.blit(stop, (screen.get_width()//2, screen.get_height()//2))
+            idle_animation(screen, stop)
             
         moving = False   
 
