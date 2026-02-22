@@ -16,6 +16,7 @@ def start_game():
     screen_height = screen.get_height()
 
     player_sprite = get_player_sprite()
+    move = player_move(get_player_sprite())
     background = get_brick_sprite()
     stop = player_idle(get_player_sprite())
 
