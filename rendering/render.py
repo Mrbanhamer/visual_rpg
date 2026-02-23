@@ -3,6 +3,25 @@ import asyncio
 from pathlib import Path
 from settings.world_settings import frame_height, frame_width
 
+class Animation:
+    def __init__(self, frames, speed, path):
+        self.frames = frames
+        self.speed = speed
+        self.frame_index = 0
+        self.path = path
+
+    def update(self):
+        self.frame_index += self.speed
+        if self.frame_index >= len(self.frames):
+            self.frame_index = 0
+
+    def draw(self, screen, position):
+        screen.blit(self.frames[int(self.frame_index)], position)
+
+    def reset(self):
+        self.frame_index = 0
+
+
 # ------------------------------
 # Base project directory
 # ------------------------------
@@ -58,6 +77,4 @@ def idle_animation(screen, stop):
     screen.blit(stop, (screen.get_width()//2, screen.get_height()//2))
 
 async def moving_animation(screen, move):
-    for x in range(4):
-        screen.blit(move[x], (screen.get_width()//2, screen.get_height()//2))
-        await asyncio.sleep(0,2)
+        screen.blit(move[0], (screen.get_width()//2, screen.get_height()//2))
