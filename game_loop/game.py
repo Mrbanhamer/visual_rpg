@@ -2,7 +2,7 @@ import pygame
 import asyncio
 from settings.world_settings import WORLD_HEIGHT, WORLD_WIDTH, frame_width, frame_height, screen_size, screen_fill
 from settings.player_settings import player_x, player_y
-from rendering.render import player_idle, player_move, get_brick_sprite, get_player_sprite, idle_animation, moving_animation
+from rendering.render import player_idle, player_move, get_brick_sprite, get_player_sprite, Animation
 
 def start_game():
     global player_x, player_y, frame_height, frame_width
@@ -13,15 +13,19 @@ def start_game():
 
     # Initialize your screen ONCE
     screen = screen_size()  
-    screen_width = screen.get_width()
-    screen_height = screen.get_height()
 
-    move = player_move(get_player_sprite())
     background = get_brick_sprite()
-    stop = player_idle(get_player_sprite())
 
     bg_width = background.get_width()
     bg_height = background.get_height()
+
+    sprite_sheet = get_player_sprite()
+
+    idle_frame = player_idle(sprite_sheet)
+    run_frames = player_move(sprite_sheet)
+
+    idle_animation = Animation([idle_frame], 0)  # speed 0 since 1 frame
+    run_animation = Animation(run_frames, 0.2)
 
     moving = False
 
@@ -56,10 +60,13 @@ def start_game():
             player_x += 300 * dt
             moving = True
 
-        if moving == True:
-            moving_animation(screen, move)
+        if moving:
+            current_animation = run_animation
         else:
-            idle_animation(screen, stop)
+            current_animation = idle_animation
+
+        current_animation.update()
+        current_animation.draw(screen, (screen.get_width()//2, screen.get_height()//2))
             
         moving = False   
 
