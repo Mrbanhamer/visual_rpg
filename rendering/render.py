@@ -4,11 +4,11 @@ from pathlib import Path
 from settings.world_settings import frame_height, frame_width
 
 class Animation:
-    def __init__(self, frames, speed, path):
+    def __init__(self, frames, speed):
         self.frames = frames
         self.speed = speed
         self.frame_index = 0
-        self.path = path
+        #self.path = path
 
     def update(self):
         self.frame_index += self.speed
@@ -21,7 +21,7 @@ class Animation:
     def reset(self):
         self.frame_index = 0
 
-
+run = Animation(4, 0.2)
 # ------------------------------
 # Base project directory
 # ------------------------------
@@ -32,6 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ------------------------------
 PLAYER_SPRITE_PATH = BASE_DIR / 'sprites' / 'Tech Dungeon Roguelite - Asset Pack (DEMO)' / 'Players' / 'No Outlines' / 'players blue x3.png'
 BRICK_PATH = BASE_DIR / 'sprites' / '128x128' / 'Brick' / 'Brick_20-128x128.png'
+
 
 
 # ------------------------------
