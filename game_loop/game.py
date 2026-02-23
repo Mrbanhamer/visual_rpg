@@ -1,7 +1,8 @@
 import pygame
 import asyncio
+from entities.player import Player
 from settings.world_settings import WORLD_HEIGHT, WORLD_WIDTH, frame_width, frame_height, screen_size, screen_fill
-from settings.player_settings import player_x, player_y
+from settings.player_settings import player_x, player_y, player_controlls, Camera
 from rendering.render import player_idle, player_move, get_brick_sprite, get_player_sprite, Animation
 
 def start_game():
@@ -29,6 +30,10 @@ def start_game():
 
     moving = False
 
+    player = Player(5, 5, 5, 5)
+
+    camera = Camera(player)
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -37,30 +42,16 @@ def start_game():
         screen_fill(screen)
 
         # Camera updates every frame
-        camera_x = player_x - screen.get_width() // 2
-        camera_y = player_y - screen.get_height() // 2
+        camera.update(screen)
 
         # Draw large world with camera offset
         for x in range(0, WORLD_WIDTH, bg_width):
             for y in range(0, WORLD_HEIGHT, bg_height):
                 screen.blit(background, (x - camera_x, y - camera_y))
 
-        keys = pygame.key.get_pressed()
+        player.handle_input(dt)
 
-        if keys[pygame.K_w]:
-            player_y -= 300 * dt
-            moving = True
-        if keys[pygame.K_s]:
-            player_y += 300 * dt
-            moving = True
-        if keys[pygame.K_a]:
-            player_x -= 300 * dt
-            moving = True
-        if keys[pygame.K_d]:
-            player_x += 300 * dt
-            moving = True
-
-        if moving:
+        if moving == True:
             current_animation = run_animation
         else:
             current_animation = idle_animation
@@ -68,8 +59,6 @@ def start_game():
         current_animation.update()
         current_animation.draw(screen, (screen.get_width()//2, screen.get_height()//2))
             
-        moving = False   
-
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 
