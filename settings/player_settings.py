@@ -12,7 +12,7 @@ class Camera:
     
     def update(self, screen, speed=0.1):
         target_x = self.player.rect.centerx - screen.get_width() // 2
-        target_y = self.player.y - screen.get_height() // 2
+        target_y = self.player.rect.centery - screen.get_height() // 2
 
         # move a fraction of the distance each frame
         self.offset_x += (target_x - self.offset_x) * speed

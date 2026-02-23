@@ -1,5 +1,5 @@
 import pygame
-from entities_template import Entity
+from entities.entities_template import Entity
 
 class Player(Entity):
     def __init__(self, hp, speed, armor, dmg_modifier):
