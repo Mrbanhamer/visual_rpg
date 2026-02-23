@@ -59,7 +59,7 @@ def start_game():
         if moving == True:
             moving_animation(screen, move)
         else:
-            idle_animation(screen, stop)
+            asyncio.run(idle_animation(screen, stop))
             
         moving = False   
 
