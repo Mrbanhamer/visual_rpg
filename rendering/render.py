@@ -1,7 +1,26 @@
 import pygame
-import asyncio
 from pathlib import Path
 from settings.world_settings import frame_height, frame_width
+
+class Animation:
+    def __init__(self, frames, speed):
+        self.frames = frames
+        self.speed = speed
+        self.frame_index = 0
+
+    def update(self, loop=True):
+        self.frame_index += self.speed
+        if self.frame_index >= len(self.frames):
+            if loop:
+                self.frame_index = 0
+            else:
+                self.frame_index = len(self.frames) - 1
+
+    def draw(self, screen, position):
+        screen.blit(self.frames[int(self.frame_index)], position)
+
+    def reset(self):
+        self.frame_index = 0
 
 # ------------------------------
 # Base project directory
@@ -14,6 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 PLAYER_SPRITE_PATH = BASE_DIR / 'sprites' / 'Tech Dungeon Roguelite - Asset Pack (DEMO)' / 'Players' / 'No Outlines' / 'players blue x3.png'
 BRICK_PATH = BASE_DIR / 'sprites' / '128x128' / 'Brick' / 'Brick_20-128x128.png'
 
+run = Animation(4, 0.2)
 
 # ------------------------------
 # Helper function to load images
@@ -53,11 +73,3 @@ def player_move(sprite_sheet):
         )
         running_frames.append(frame)
     return running_frames
-
-def idle_animation(screen, stop):
-    screen.blit(stop, (screen.get_width()//2, screen.get_height()//2))
-
-async def moving_animation(screen, move):
-    for x in range(4):
-        screen.blit(move[x], (screen.get_width()//2, screen.get_height()//2))
-        await asyncio.sleep(0,2)
