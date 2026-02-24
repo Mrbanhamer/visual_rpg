@@ -8,7 +8,7 @@ class Player(Entity):
         self.rect = pygame.Rect(100, 100, 32, 48)
         self.moving = False
 
-    def handle_input(self, dt):
+    def move(self, dt):
         keys = pygame.key.get_pressed()
         self.moving = False
 
