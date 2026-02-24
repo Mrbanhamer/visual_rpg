@@ -33,8 +33,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 PLAYER_SPRITE_PATH = BASE_DIR / 'sprites' / 'Tech Dungeon Roguelite - Asset Pack (DEMO)' / 'Players' / 'No Outlines' / 'players blue x3.png'
 BRICK_PATH = BASE_DIR / 'sprites' / '128x128' / 'Brick' / 'Brick_20-128x128.png'
 
-run = Animation(4, 0.2)
-
 # ------------------------------
 # Helper function to load images
 # ------------------------------
