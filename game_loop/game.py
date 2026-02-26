@@ -49,50 +49,13 @@ def start_game():
         # Update camera first
         camera.update(screen)
 
-<<<<<<< HEAD
-        # Draw large world with camera offset
-        for x in range(0, WORLD_WIDTH, bg_width):
-            for y in range(0, WORLD_HEIGHT, bg_height):
-                screen.blit(background, (x - camera_x, y - camera_y))
-
-        keys = pygame.key.get_pressed()
-
-        if keys[pygame.K_w]:
-            player_y -= 300 * dt
-            moving = True
-        if keys[pygame.K_s]:
-            player_y += 300 * dt
-            moving = True
-        if keys[pygame.K_a]:
-            player_x -= 300 * dt
-            moving = True
-        if keys[pygame.K_d]:
-            player_x += 300 * dt
-            moving = True
-
-        if moving:
-            current_animation = run_animation
-        else:
-<<<<<<< HEAD
-            asyncio.run(idle_animation(screen, stop))
-=======
-            current_animation = idle_animation
-=======
         # Draw world
         world.draw_background(camera)
->>>>>>> player_settings
 
         # Move player and determine animation
         player.move(dt)
         current_animation = run_animation if player.moving else idle_animation
         current_animation.update()
-<<<<<<< HEAD
-        current_animation.draw(screen, (screen.get_width()//2, screen.get_height()//2))
->>>>>>> 5656f7222d2ff73727627d8a8910c8df75880d8e
-            
-        moving = False   
-=======
->>>>>>> player_settings
 
         # Draw player at camera-adjusted position
         draw_pos = camera.apply(player.rect)
